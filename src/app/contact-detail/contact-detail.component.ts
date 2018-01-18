@@ -32,4 +32,9 @@ export class ContactDetailComponent implements OnInit {
     this.location.back();
   }
 
+  save(): void {
+   this.contactService.updateContact(this.contact)
+     .subscribe(() => this.goBack());
+ }
+
 }

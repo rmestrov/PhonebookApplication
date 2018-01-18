@@ -3,10 +3,15 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { Contact } from './contact';
-import { CONTACTS } from './my-contacts';
+//import { CONTACTS } from './my-contacts';
 import { MessageService } from './message.service';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class ContactService {
@@ -18,12 +23,36 @@ export class ContactService {
     private messageService: MessageService) { }
 
   getContacts(): Observable<Contact[]> {
-    return this.http.get<Contact[]>(this.contactsUrl);
+    return this.http.get<Contact[]>(this.contactsUrl)
+      .pipe(
+        tap(contacts => this.log(`fetched contacts`)),
+        catchError(this.handleError('getContacts', []))
+      );
   }
 
   getContact(id: number): Observable<Contact> {
-    this.messageService.add(`ContactService: fetched contact id=${id}`);
-    return of(CONTACTS.find(contact => contact.id === id));
+    const url = `${this.contactsUrl}/${id}`;
+    return this.http.get<Contact>(url).pipe(
+    tap(_ => this.log(`fetched contact id=${id}`)),
+    catchError(this.handleError<Contact>(`getContact id=${id}`))
+  );
+}
+
+updateContact (contact: Contact): Observable<any> {
+  return this.http.put(this.contactsUrl, contact, httpOptions).pipe(
+    tap(_ => this.log(`updated contact id=${contact.id}`)),
+    catchError(this.handleError<any>('updateContact'))
+  );
+}
+
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
+
+      return of(result as T);
+    };
   }
 
   private log(message: string) {
