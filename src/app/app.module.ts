@@ -8,6 +8,7 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
 import { ContactService } from './contact.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MessageService } from './message.service';
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule,
   ],
   providers: [ ContactService, MessageService ],
   bootstrap: [AppComponent]

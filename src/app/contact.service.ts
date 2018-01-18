@@ -15,4 +15,9 @@ export class ContactService {
     return of(CONTACTS);
   }
 
+  getContact(id: number): Observable<Contact> {
+    this.messageService.add(`ContactService: fetched contact id=${id}`);
+    return of(CONTACTS.find(contact => contact.id === id));
+  }
+
 }
