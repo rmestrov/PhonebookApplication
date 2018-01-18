@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Contact } from '../contact';
+import { CONTACTS } from '../my-contacts';
 
 @Component({
   selector: 'app-contacts',
@@ -11,5 +13,11 @@ export class ContactsComponent implements OnInit {
 
   ngOnInit() {
   }
+  selectedContact: Contact;
 
+  onSelect(contact: Contact): void {
+    this.selectedContact = contact;
+  }
+
+  contacts = CONTACTS;
 }
