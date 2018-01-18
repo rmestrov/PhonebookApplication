@@ -1,5 +1,15 @@
 <h2>My Contacts</h2>
 
+<div>
+  <label>Contact name:
+    <input #contactName />
+  </label>
+  <button (click)="add(contactName.value); contactName.value=''">
+    Add
+  </button>
+</div>
+
+
 <ul class="contacts">
   <li *ngFor="let contact of contacts">
     <a routerLink="/detail/{{contact.id}}">

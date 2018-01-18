@@ -45,6 +45,12 @@ updateContact (contact: Contact): Observable<any> {
   );
 }
 
+addContact (contact: Contact): Observable<Contact> {
+  return this.http.post<Contact>(this.contactsUrl, contact, httpOptions).pipe(
+    tap((contact: Contact) => this.log(`added contact w/ id=${contact.id}`)),
+    catchError(this.handleError<Contact>('addContact'))
+  );
+}
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -22,4 +22,13 @@ getContacts(): void {
     this.getContacts();
   }
 
+  add(name: string): void {
+  name = name.trim();
+  if (!name) { return; }
+  this.contactService.addContact({ name } as Contact)
+    .subscribe(hero => {
+      this.contacts.push(hero);
+    });
+}
+
 }
