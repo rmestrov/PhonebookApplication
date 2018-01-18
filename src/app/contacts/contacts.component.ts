@@ -29,6 +29,12 @@ getContacts(): void {
     .subscribe(hero => {
       this.contacts.push(hero);
     });
+  }
+
+  delete(contact: Contact): void {
+  this.contacts = this.contacts.filter(h => h !== contact);
+  this.contactService.deleteContact(contact).subscribe();
 }
+
 
 }

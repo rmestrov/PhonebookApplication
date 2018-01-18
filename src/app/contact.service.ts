@@ -52,6 +52,16 @@ addContact (contact: Contact): Observable<Contact> {
   );
 }
 
+deleteContact (contact: Contact | number): Observable<Contact> {
+  const id = typeof contact === 'number' ? contact : contact.id;
+  const url = `${this.contactsUrl}/${id}`;
+
+  return this.http.delete<Contact>(url, httpOptions).pipe(
+    tap(_ => this.log(`deleted contact id=${id}`)),
+    catchError(this.handleError<Contact>('deleteContact'))
+  );
+}
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
