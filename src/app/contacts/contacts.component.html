@@ -1,4 +1,5 @@
 <h2>My Contacts</h2>
+
 <ul class="contacts">
   <li *ngFor="let contact of contacts"
   [class.selected]="contact === selectedContact"
@@ -6,13 +7,5 @@
     <span class="badge">{{contact.id}}</span> {{contact.name}}
   </li>
 </ul>
-<div *ngIf="selectedContact">
 
-<h2>About Contact: {{ selectedContact.name | uppercase }}</h2>
-  <div><span>ID: </span>{{ selectedContact.id }}</div>
-  <div>
-    <label>Name:
-    <input [(ngModel)]="selectedContact.name" placeholder="name">
-    </label>
-  </div>
-</div>
+<app-contact-detail [contact]="selectedContact"></app-contact-detail>
