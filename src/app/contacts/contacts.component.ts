@@ -9,15 +9,17 @@ import { CONTACTS } from '../my-contacts';
 })
 export class ContactsComponent implements OnInit {
 
+   contacts = CONTACTS;
+
+   selectedContact: Contact;
+
   constructor() { }
 
   ngOnInit() {
   }
-  selectedContact: Contact;
 
   onSelect(contact: Contact): void {
     this.selectedContact = contact;
   }
 
-  contacts = CONTACTS;
 }
