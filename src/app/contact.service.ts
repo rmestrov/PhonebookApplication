@@ -62,6 +62,17 @@ deleteContact (contact: Contact | number): Observable<Contact> {
   );
 }
 
+
+searchContacts(term: string): Observable<Contact[]> {
+  if (!term.trim()) {
+    return of([]);
+  }
+  return this.http.get<Contact[]>(`api/contacts/?name=${term}`).pipe(
+    tap(_ => this.log(`found contacts matching "${term}"`)),
+    catchError(this.handleError<Contact[]>('searchContacts', []))
+  );
+}
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

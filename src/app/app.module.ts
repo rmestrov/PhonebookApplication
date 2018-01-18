@@ -13,13 +13,15 @@ import { ContactService } from './contact.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
+import { ContactSearchComponent } from './contact-search/contact-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactsComponent,
     ContactDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    ContactSearchComponent
   ],
   imports: [
     BrowserModule,
