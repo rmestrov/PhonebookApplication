@@ -27,7 +27,7 @@ export class ContactSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.contacts$ = this.searchTerms.pipe(
-      debounceTime(200),
+      debounceTime(100),
       distinctUntilChanged(),
       switchMap((term: string) =>
       this.contactService.searchContacts(term)),
